@@ -24,7 +24,7 @@
 % \DeclareMathOperator{\permindex}{index}
 % \DeclareMathOperator{\Inv}{Inv}
 \DeclareMathOperator{\probability}{P}
-% \DeclareMathOperator{\expectedvalue}{E}
+\DeclareMathOperator{\expectedvalue}{E}
 % \DeclareMathOperator{\meet}{\wedge}
 % \DeclareMathOperator{\bigmeet}{\bigwedge}
 % \DeclareMathOperator{\join}{\vee}
@@ -57,15 +57,12 @@
 		\end{frame}
 
 		\begin{frame}
-			\frametitle{Desirable Election Systems}
+			\frametitle{Fairness in Election Systems}
 			\begin{itemize}
-				\item Fairness
-				\begin{itemize}
-					\item Everyone should have an equal say
-					\item Winner should accurately represent the group
-					\item Simple with 2 alternatives; complicated with many
-					\item First studied by Condorcet
-				\end{itemize}
+				\item Everyone should have an equal say
+				\item Winner should accurately represent the group preference
+				\item Simple with 2 alternatives; complicated with many
+				\item First studied by Condorcet
 			\end{itemize}
 
 			\note{
@@ -83,12 +80,16 @@
 
 		\begin{frame}
 			\frametitle{Arrow's Impossibility Theorem}
-			\begin{itemize}
-				\item Unrestricted domain (universality)
-				\item Independence of irrelevant alternatives
-				\item Pareto principle (unanimity)
-				\item Non-dictatorship
-			\end{itemize}
+			\begin{description}
+				\item[Unrestricted domain (universality)] \hfill \\
+					All individual preferences are allowed.
+				\item[Independence of irrelevant alternatives] \hfill \\
+					If all voters' preferences between alternatives x and y remain the same, the group preference between x and y is unchanged even if voters change their preferences regarding other alternatives.
+				\item[Pareto principle (unanimity)] \hfill \\
+					If all individuals prefer x to y, then the group prefers x to y.
+				\item[Non-dictatorship] \hfill \\
+					There is no voter whose preference always dictates the group's preference.
+			\end{description}
 
 			\note{
 				No social welfare function (election system) with 3 or more alternatives can satisfy all of these.
@@ -130,11 +131,13 @@
 
 		\begin{frame}
 			\frametitle{Gibbard-Satterthwaite Theorem}
+
 			Voting rules are manipulable if they satisfy:
-			\begin{itemize}
-				\item \textbf{Non-dictatorship}: No single voter always dictates the group preference.
-				\item \textbf{Non-imposition}: Every alternative has the possibility of winning.
-			\end{itemize}
+
+			\begin{description}
+				\item[Non-dictatorship] No single voter always dictates the group preference.
+				\item[Non-imposition] Every alternative has the possibility of winning.
+			\end{description}
 
 			\note{
 				They must satisfy both of these.
@@ -186,11 +189,13 @@
 
 		\begin{frame}
 			\frametitle{Proof Summary}
+
 			Friedgut's proof is in three steps:
+
 			\begin{description}
-				\item[Step 1:] application of a quantitative version of Arrow's impossibility theorem.
-				\item[Step 2:] reduction from an SCF with low dependence on irrelevant alternatives to a GSWF with a low paradox probability.
-				\item[Step 3:] reduction from low manipulation power to low dependence on irrelevant alternatives.
+				\item[Step 1] Application of a quantitative version of Arrow's impossibility theorem.
+				\item[Step 2] Reduction from an SCF with low dependence on irrelevant alternatives to a GSWF with a low paradox probability.
+				\item[Step 3] Reduction from low manipulation power to low dependence on irrelevant alternatives.
 			\end{description}
 		\end{frame}
 
@@ -248,14 +253,14 @@
 
 			\begin{lemma}[Original Lemma 6]
 				\[
-					M^{a,b}(f) = E_{q \in L(C)^n} \left[ \frac{|A(q)|}{3^n} \cdot \frac{|B(q)|}{3^n} \right],
+					M^{a,b}(f) = \expectedvalue_{q \in L(C)^n} \left[ \frac{|A(q)|}{3^n} \cdot \frac{|B(q)|}{3^n} \right],
 				\]
 				where $q$ is chosen uniformly at random.
 			\end{lemma}
 
 			\begin{lemma}[Generalized Lemma 6]
 				\[
-					M^{a,b}(f) = E_{q \in L(C)^n} \left[ \frac{|A(q)|}{\left(\frac{m!}{2}\right)^n} \cdot \frac{|B(q)|}{\left(\frac{m!}{2}\right)^n} \right],
+					M^{a,b}(f) = \expectedvalue_{q \in L(C)^n} \left[ \frac{|A(q)|}{\left(\frac{m!}{2}\right)^n} \cdot \frac{|B(q)|}{\left(\frac{m!}{2}\right)^n} \right],
 				\]
 				where $q$ is chosen uniformly at random.
 			\end{lemma}
@@ -311,7 +316,7 @@
 			\]
 			as
 			\[
-				M^{a,b}(f) = E_{q \in L(C)^n} \left[ \frac{|A(q)|}{\left(\frac{m!}{2}\right)^n} \cdot \frac{|B(q)|}{\left(\frac{m!}{2}\right)^n} \right],
+				M^{a,b}(f) = \expectedvalue_{q \in L(C)^n} \left[ \frac{|A(q)|}{\left(\frac{m!}{2}\right)^n} \cdot \frac{|B(q)|}{\left(\frac{m!}{2}\right)^n} \right],
 			\]
 			\qed
 		\end{frame}
@@ -324,13 +329,13 @@
 
 			\begin{lemma}[Original Lemma 7]
 				\[
-					\sum_i M_i(f) \ge \frac{1}{6} 3^{-n} E_p \left[|\partial A(p)| + |\partial B(p)| \right]
+					\sum_i M_i(f) \ge \frac{1}{6} 3^{-n} \expectedvalue_p \left[|\partial A(p)| + |\partial B(p)| \right]
 				\]
 			\end{lemma}
 
 			\begin{lemma}[Generalized Lemma 7]
 				\[
-					\sum_i M_i(f) \ge \frac{1}{m!} \left(\frac{m!}{2}\right)^{-n} E_p \left[|\partial A(p)| + |\partial B(p)| \right]
+					\sum_i M_i(f) \ge \frac{1}{m!} \left(\frac{m!}{2}\right)^{-n} \expectedvalue_p \left[|\partial A(p)| + |\partial B(p)| \right]
 				\]
 			\end{lemma}
 		\end{frame}
@@ -433,19 +438,19 @@
 			\begin{itemize}
 				\item Therefore, the probability that a randomly chosen edge is in either $\partial_i A(p)$ or $\partial_i B(p)$ is
 					\[
-						\frac{2}{m!} \left(\frac{2}{m!}\right)^{n} \cdot E_p \left[ |\partial_i A(p)| + |\partial_i B(p)| \right]
+						\frac{2}{m!} \left(\frac{2}{m!}\right)^{n} \cdot \expectedvalue_p \left[ |\partial_i A(p)| + |\partial_i B(p)| \right]
 					\]
 				\item We conditioned our analysis on $p_{-i}|_{\{a,b\}} = p'_{-i}|_{\{a,b\}}$, so our lower bound becomes
 					\[
-						M_i(f) \ge \frac{1}{2} \cdot \frac{2}{m!}\left(\frac{2}{m!}\right)^{n} \cdot E_p \left[ |\partial_i A(p)| + |\partial_i B(p)| \right].
+						M_i(f) \ge \frac{1}{2} \cdot \frac{2}{m!}\left(\frac{2}{m!}\right)^{n} \cdot \expectedvalue_p \left[ |\partial_i A(p)| + |\partial_i B(p)| \right].
 					\]
 				\item Simplifying gives
 					\[
-						M_i(f) \ge \frac{1}{m!}\left(\frac{2}{m!}\right)^{n} \cdot E_p \left[ |\partial_i A(p)| + |\partial_i B(p)| \right].
+						M_i(f) \ge \frac{1}{m!}\left(\frac{2}{m!}\right)^{n} \cdot \expectedvalue_p \left[ |\partial_i A(p)| + |\partial_i B(p)| \right].
 					\]
 				\item Summing over $i$ gives
 					\[
-						\sum_i M_i(f) \ge \frac{1}{m!}\left(\frac{2}{m!}\right)^{n} \cdot E_p \left[ |\partial A(p)| + |\partial B(p)| \right].
+						\sum_i M_i(f) \ge \frac{1}{m!}\left(\frac{2}{m!}\right)^{n} \cdot \expectedvalue_p \left[ |\partial A(p)| + |\partial B(p)| \right].
 					\]
 			\end{itemize}
 
@@ -486,20 +491,21 @@
 
 			Restatement of the lemmas:
 			\begin{align*}
-				&M^{a,b} = E[|A||B|] \cdot L_6 & \textrm{lemma 6} \\
-				&L_7 \cdot E[|\partial A| + |\partial B|] \le \sum_i M_i & \textrm{lemma 7} \\
+				&M^{a,b} = \expectedvalue[|A||B|] \cdot L_6 & \textrm{lemma 6} \\
+				&L_7 \cdot \expectedvalue[|\partial A| + |\partial B|] \le \sum_i M_i & \textrm{lemma 7} \\
 				&\frac{1}{L_8} \cdot (|\partial A| + |\partial B|) \ge |A||B| & \textrm{lemma 8}
 			\end{align*}
 
 			Now we can solve for the result of step 3:
 			\begin{align*}
-				M^{a,b} &= E[|A||B|] \cdot L_6 & \textrm{lemma 6} \\
-				M^{a,b} &\le E[|\partial A| + |\partial B|] \cdot \frac{L_6}{L_8} & \textrm{by lemma 8} \\
+				M^{a,b} &= \expectedvalue[|A||B|] \cdot L_6 & \textrm{lemma 6} \\
+				M^{a,b} &\le \expectedvalue[|\partial A| + |\partial B|] \cdot \frac{L_6}{L_8} & \textrm{by lemma 8} \\
 				M^{a,b} &\le \sum_i M_i \cdot \frac{L_6}{L_7L_8} & \textrm{by lemma 7}
 			\end{align*}
 
 			\note{
 				$A \equiv A(p)$ because it's \emph{much} easier to read
+				Also, $M^{a,b} \equiv M^{a,b}(f)$ and $M_i \equiv M_i(f)$
 			}
 		\end{frame}
 
@@ -525,22 +531,35 @@
 			\frametitle{Step 3 Result}
 
 			The final result for step 3 is:
-			\begin{align*}
-				M^{a,b} &\le \sum_i M_i \cdot m!
-			\end{align*}
+			\[
+				M^{a,b}(f) \le \sum_i M_i(f) \cdot m!
+			\]
+
+			By combining it with Friedgut's step 1 and 2 we get the generalized main theorem:
+			\begin{theorem}[Main Result]
+				There exists a constant $C > 0$ such that for every $\epsilon > 0$ the following holds. If $f$ is a neutral SCF for $n$ voters over 3 alternatives and $\Delta(f, g) > \epsilon$ for any dictatorship $g$, then $f$ has total manipulatiblity: $\sum^n_{i=1} M_i(f) \ge \frac{(C\epsilon)^{\lfloor m/3 \rfloor}}{m!}$.
+			\end{theorem}
 		\end{frame}
 
 		\begin{frame}
 			\frametitle{Independent Work}
 			\begin{itemize}
-				\item Placeholder 
+				\item Isaksson, Kindler, and Mossel have, independently and during the writing of this thesis, published a brilliant generalization of the original theorem of Friedgut, Kalai, and Nisan and even improved slightly upon the results. In their paper ``The geometry of manipulation: A quantitative proof of the gibbard-satterthwaite theorem.''
+				\item Translating their results into the terminology we have been using, they proved that for a neutral social choice function $f$ with $m \ge 4$ alternatives and $n$ voters that is $\epsilon$-far from dictatorship, a uniformly chosen profile will be manipulable with probability at least $2^{-1} \epsilon^2 n^{-4} m^{-6} (m!)^{-3}$.
 			\end{itemize}
+
+			\note{
+				Unfortunately for me, but fortunately for the field of social choice theory as a whole.
+			}
 		\end{frame}
+
+
+	\section{Questions}
 
 		\begin{frame}
 			\frametitle{Questions}
-			\begin{itemize}
-				\item Placeholder
-			\end{itemize}
+
+			\vspace*{-0.12cm}
+			\centerline{\includegraphics[height=0.85\paperheight, keepaspectratio]{../figures/question_kitten.jpg}}
 		\end{frame}
 \end{document}
