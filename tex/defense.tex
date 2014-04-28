@@ -1,7 +1,15 @@
 \documentclass[aspectratio=169]{beamer}
+\usepackage{pgfpages}
 
 % \setbeameroption{show only notes}
-% \setbeameroption{show notes}
+\setbeameroption{show notes}
+
+% Handouts
+% \pgfpagesuselayout{4 on 1}[letterpaper,border shrink=5mm,landscape]
+
+% Presentation
+% \pgfpagesuselayout{2 on 1}[a4paper,landscape]
+
 \usetheme{PaperPlane}
 % \usetheme{Darmstadt}
 
@@ -19,17 +27,8 @@
 \renewcommand{\titlepage}{\otp\addtocounter{framenumber}{-1}}
 
 % Math operators
-% \DeclareMathOperator*{\argmax}{arg\,max}
-% \DeclareMathOperator*{\argmin}{arg\,min}
-% \DeclareMathOperator{\permindex}{index}
-% \DeclareMathOperator{\Inv}{Inv}
 \DeclareMathOperator{\probability}{P}
 \DeclareMathOperator{\expectedvalue}{E}
-% \DeclareMathOperator{\meet}{\wedge}
-% \DeclareMathOperator{\bigmeet}{\bigwedge}
-% \DeclareMathOperator{\join}{\vee}
-% \DeclareMathOperator{\bigjoin}{\bigvee}
-% \DeclareMathOperator{\symmetricdifference}{\vartriangle}
 
 
 \title{A Generalized Probabilistic Gibbard-Satterthwaite Theorem}
@@ -53,7 +52,26 @@
 				\item Search engine page-ranking
 			\end{itemize}
 
-			\note{Why are elections important? They can be applied any time independent agents need to come to a consensus.}
+			\note{
+				Why are elections important?
+
+				They can be applied any time independent agents need to come to a consensus.
+			}
+		\end{frame}
+
+		\begin{frame}
+			\frametitle{Modeling an Election}
+			\begin{itemize}
+				\item Each voter ranks the alternatives (\emph{preference list})
+				\item All the preference lists make up a \emph{preference profile}
+				\item A \emph{voting rule} (election system) chooses a winner based on a profile
+			\end{itemize}
+
+			\note{
+				The interesting part is the voting rules.
+
+				This field of study is called social choice theory.
+			}
 		\end{frame}
 
 		\begin{frame}
@@ -62,11 +80,12 @@
 				\item Everyone should have an equal say
 				\item Winner should accurately represent the group preference
 				\item Simple with 2 alternatives; complicated with many
-				\item First studied by Condorcet
 			\end{itemize}
 
 			\note{
 				With two alternatives the one prefered by the most voters should win.
+
+				First studied by Condorcet
 
 				He proposed that the winning candidate be the candidate who would win a head-to-head election against each of the other candidates.
 
@@ -79,37 +98,8 @@
 		\end{frame}
 
 		\begin{frame}
-			\frametitle{Arrow's Impossibility Theorem}
-			\begin{description}
-				\item[Unrestricted domain (universality)] \hfill \\
-					All individual preferences are allowed.
-				\item[Independence of irrelevant alternatives] \hfill \\
-					If all voters' preferences between alternatives x and y remain the same, the group preference between x and y is unchanged even if voters change their preferences regarding other alternatives.
-				\item[Pareto principle (unanimity)] \hfill \\
-					If all individuals prefer x to y, then the group prefers x to y.
-				\item[Non-dictatorship] \hfill \\
-					There is no voter whose preference always dictates the group's preference.
-			\end{description}
-
-			\note{
-				No social welfare function (election system) with 3 or more alternatives can satisfy all of these.
-
-				These all seem like obvious basic requirements for a ``fair'' election system.
-
-				Unrestricted domain: All individual preferences are allowed and yield a valid group preference.
-
-				Independence of irrelevant alternatives: If all voters' preferences between alternatives x and y remain the same, the group preference between x and y is unchanged even if voters change their preferences regarding other alternatives.
-
-				Pareto principle (unanimity): Unanimity of individual preferences implies a group preference. E.g. if all individuals prefer alternative x to y, then the group will prefer x to y.
-
-				Non-dictatorship: There is no voter whose preference always dictates the group's preference.
-
-				So we have to compromise.
-			}
-		\end{frame}
-
-		\begin{frame}
 			\frametitle{Manipulation}
+
 			A voter can get a better result by voting strategically, rather than voting his actual preferences.
 
 			\vspace{2em}
@@ -119,6 +109,8 @@
 			\centerline{\includegraphics[height=0.4\paperheight, keepaspectratio]{../figures/manipulation_example.pdf}}
 
 			\note{
+				Manipulation is an enemy of fairness because the manipulative voter gets more influence than others.
+
 				Assume a simple plurality/first-past-the-post system.
 
 				In the first case it would be a tie, but lets assume our arbitrary tie breaking technique will choose the Democrats.
@@ -140,7 +132,58 @@
 			\end{description}
 
 			\note{
+				We would like to devise an unmanipulable voting rule, but this theorem says it's impossible.
+
 				They must satisfy both of these.
+			}
+		\end{frame}
+
+		\begin{frame}
+			\frametitle{Circumventing the Gibbard-Satterthwaite Theorem}
+
+			\begin{itemize}
+				\item Bartholdi, Tovey, and Trick studied the computational difficulty of finding a winner for various voting rules
+				\item Computational aspect of voting rules is significant
+				\item The Dodgson method is infeasible to manipulate because finding the winner is NP-hard
+				\item Voting rules need to resist manipulation \emph{and} make it feasible to find the winner
+				\item People began to search for a computational barrier to manipulation
+			\end{itemize}
+		\end{frame}
+
+		\begin{frame}
+			\frametitle{Random Manipulation}
+
+			\begin{itemize}
+				\item Friedgut, Kalai, and Nisan studied random manipulation
+				\item Succeeds with non-negligible probability
+				\item Shows the limits of a computational barrier to manipulation
+				\item Only proved results for elections with 3 alternatives
+				\item This is the work I attempted to generalize
+			\end{itemize}
+
+			\note{
+				If you alternative is not winning, randomly permute your preference list.
+			}
+		\end{frame}
+
+		\begin{frame}
+			\frametitle{Independent Work}
+			\begin{itemize}
+				\item Isaksson, Kindler, and Mossel have, independently and during the writing of this thesis, published a brilliant generalization of the original theorem of Friedgut, Kalai, and Nisan and even improved slightly upon the results. In their paper ``The geometry of manipulation: A quantitative proof of the gibbard-satterthwaite theorem.''
+				\item Translating their results into the terminology we have been using, they proved that for a neutral social choice function $f$ with $m \ge 4$ alternatives and $n$ voters that is $\epsilon$-far from dictatorship, a uniformly chosen profile will be manipulable with probability at least $2^{-1} \epsilon^2 n^{-4} m^{-6} (m!)^{-3}$.
+			\end{itemize}
+
+			\note{
+				Before a formal look at my work, as a disclaimer, others have published an independent generalization before I was finished.
+
+				This is unfortunately for me, but fortunate for the field of social choice theory as a whole.
+
+				My work is useful as:
+				\begin{itemize}
+					\item A simpler proof
+					\item A proof that closely follows the original
+					\item An alternative proof
+				\end{itemize}
 			}
 		\end{frame}
 
@@ -539,18 +582,6 @@
 			\begin{theorem}[Main Result]
 				There exists a constant $C > 0$ such that for every $\epsilon > 0$ the following holds. If $f$ is a neutral SCF for $n$ voters over 3 alternatives and $\Delta(f, g) > \epsilon$ for any dictatorship $g$, then $f$ has total manipulatiblity: $\sum^n_{i=1} M_i(f) \ge \frac{(C\epsilon)^{\lfloor m/3 \rfloor}}{m!}$.
 			\end{theorem}
-		\end{frame}
-
-		\begin{frame}
-			\frametitle{Independent Work}
-			\begin{itemize}
-				\item Isaksson, Kindler, and Mossel have, independently and during the writing of this thesis, published a brilliant generalization of the original theorem of Friedgut, Kalai, and Nisan and even improved slightly upon the results. In their paper ``The geometry of manipulation: A quantitative proof of the gibbard-satterthwaite theorem.''
-				\item Translating their results into the terminology we have been using, they proved that for a neutral social choice function $f$ with $m \ge 4$ alternatives and $n$ voters that is $\epsilon$-far from dictatorship, a uniformly chosen profile will be manipulable with probability at least $2^{-1} \epsilon^2 n^{-4} m^{-6} (m!)^{-3}$.
-			\end{itemize}
-
-			\note{
-				Unfortunately for me, but fortunately for the field of social choice theory as a whole.
-			}
 		\end{frame}
 
 
