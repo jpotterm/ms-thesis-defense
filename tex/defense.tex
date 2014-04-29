@@ -2,7 +2,7 @@
 \usepackage{pgfpages}
 
 % \setbeameroption{show only notes}
-\setbeameroption{show notes}
+% \setbeameroption{show notes}
 
 % Handouts
 % \pgfpagesuselayout{4 on 1}[letterpaper,border shrink=5mm,landscape]
@@ -169,12 +169,13 @@
 		\begin{frame}
 			\frametitle{Independent Work}
 			\begin{itemize}
-				\item Isaksson, Kindler, and Mossel have, independently and during the writing of this thesis, published a brilliant generalization of the original theorem of Friedgut, Kalai, and Nisan and even improved slightly upon the results. In their paper ``The geometry of manipulation: A quantitative proof of the gibbard-satterthwaite theorem.''
-				\item Translating their results into the terminology we have been using, they proved that for a neutral social choice function $f$ with $m \ge 4$ alternatives and $n$ voters that is $\epsilon$-far from dictatorship, a uniformly chosen profile will be manipulable with probability at least $2^{-1} \epsilon^2 n^{-4} m^{-6} (m!)^{-3}$.
+				\item Isaksson, Kindler, and Mossel have independently published a generalization in their paper \emph{The geometry of manipulation: A quantitative proof of the gibbard-satterthwaite theorem}
+				\item They proved that for a neutral social choice function, a uniformly chosen profile will be manipulable with probability at least $2^{-1} \epsilon^2 n^{-4} m^{-6} (m!)^{-3}$
+				\item Where $\epsilon$ is the distance from dictatorship
 			\end{itemize}
 
 			\note{
-				Before a formal look at my work, as a disclaimer, others have published an independent generalization before I was finished.
+				Before a formal look at my work, as a disclaimer, others have published an independent generalization before I finished.
 
 				This is unfortunately for me, but fortunate for the field of social choice theory as a whole.
 
@@ -217,7 +218,7 @@
 		\begin{frame}
 			\frametitle{Restricted Preference Profiles}
 			\begin{itemize}
-				\item For a preference list $v$, $v|_D$ means $v$ \emph{restricted to} $D$, i.e. $v$ with the alternatives from $D$ removed.
+				\item For a preference list $v$, $v|_D$ means $v$ \emph{restricted to} $D$, i.e. $v$ with the alternatives not in $D$ removed.
 				\item For a preference profile, $p$, $p|_D$ means $p$ with each preference list restricted to $D$.
 			\end{itemize}
 
@@ -225,6 +226,34 @@
 
 			\vspace{.5em}
 			\centerline{\includegraphics[height=0.3\paperheight, keepaspectratio]{../figures/restriction_example.pdf}}
+		\end{frame}
+
+		\begin{frame}
+			\frametitle{Manipulation Power}
+
+			\begin{itemize}
+				\item Manipulation power $M_i(f)$, of voter $i$ on a social choice function $f$ is the probability that $p'_i$ is a profitable manipulation by voter $i$
+				\item Where $p$ is a profile and $p'_i$ is a preference list which are both chosen uniformly at random
+			\end{itemize}
+		\end{frame}
+
+		\begin{frame}
+			\frametitle{Manipulation Potential}
+
+			\[
+				M^{a,b}(f) = \probability[f(p) = a, f(p') = b]
+			\]
+
+			\begin{itemize}
+				\item Describes the scenario where all players together attempt to manipulate $f$ to be $b$ rather than $a$
+				\item $p$ and $p'$ are chosen uniformly at random
+			\end{itemize}
+
+			\note{
+				This definition captures the scenario where all players together attempt to manipulate $f$ to be $b$ rather than $a$ by re-choosing at random all their preferences---except those between $a$ and $b$.
+
+				This definition does not require that anyone in particular gain from this, just that something ``unexpected'' happens.
+			}
 		\end{frame}
 
 
