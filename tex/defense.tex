@@ -2,7 +2,7 @@
 \usepackage{pgfpages}
 
 % \setbeameroption{show only notes}
-% \setbeameroption{show notes}
+\setbeameroption{show notes}
 
 % Handouts
 % \pgfpagesuselayout{4 on 1}[letterpaper,border shrink=5mm,landscape]
@@ -44,6 +44,7 @@
 
 		\begin{frame}
 			\frametitle{Importance of Elections}
+
 			\begin{itemize}
 				\item Political voting
 				\item Electing board members
@@ -51,20 +52,15 @@
 				\item Artificial intelligent agent decision
 				\item Search engine page-ranking
 			\end{itemize}
-
-			\note{
-				Why are elections important?
-
-				They can be applied any time independent agents need to come to a consensus.
-			}
 		\end{frame}
 
 		\begin{frame}
 			\frametitle{Modeling an Election}
+
 			\begin{itemize}
 				\item Each voter ranks the alternatives (\emph{preference list})
 				\item All the preference lists make up a \emph{preference profile}
-				\item A \emph{voting rule} (election system) chooses a winner based on a profile
+				\item A \emph{voting rule} (election system, social choice function) chooses a winner based on a profile
 			\end{itemize}
 
 			\note{
@@ -76,6 +72,7 @@
 
 		\begin{frame}
 			\frametitle{Fairness in Election Systems}
+
 			\begin{itemize}
 				\item Everyone should have an equal say
 				\item Winner should accurately represent the group preference
@@ -83,17 +80,7 @@
 			\end{itemize}
 
 			\note{
-				With two alternatives the one prefered by the most voters should win.
-
-				First studied by Condorcet
-
-				He proposed that the winning candidate be the candidate who would win a head-to-head election against each of the other candidates.
-
-				Such a winner is known as the Condorcet winner.
-
-				Unfortunately, Condorcet also proved that a Condorcet winner does not always exist.
-
-				But this was one of the first fairness criterion.
+				With two alternatives the one preferred by the most voters should win.
 			}
 		\end{frame}
 
@@ -133,8 +120,6 @@
 
 			\note{
 				We would like to devise an unmanipulable voting rule, but this theorem says it's impossible.
-
-				They must satisfy both of these.
 			}
 		\end{frame}
 
@@ -142,12 +127,15 @@
 			\frametitle{Circumventing the Gibbard-Satterthwaite Theorem}
 
 			\begin{itemize}
+				\item Searching for a computational barrier to manipulation
 				\item Bartholdi, Tovey, and Trick studied the computational difficulty of finding a winner for various voting rules
-				\item Computational aspect of voting rules is significant
 				\item The Dodgson method is infeasible to manipulate because finding the winner is NP-hard
 				\item Voting rules need to resist manipulation \emph{and} make it feasible to find the winner
-				\item People began to search for a computational barrier to manipulation
 			\end{itemize}
+
+			\note{
+				Many people have followed this line of research to great effect.
+			}
 		\end{frame}
 
 		\begin{frame}
@@ -162,7 +150,7 @@
 			\end{itemize}
 
 			\note{
-				If you alternative is not winning, randomly permute your preference list.
+				If your alternative is not winning, randomly permute your preference list.
 			}
 		\end{frame}
 
@@ -175,11 +163,11 @@
 			\end{itemize}
 
 			\note{
-				Before a formal look at my work, as a disclaimer, others have published an independent generalization before I finished.
+				As a disclaimer before a formal look at my work, others have published an independent generalization before I finished.
 
-				This is unfortunately for me, but fortunate for the field of social choice theory as a whole.
+				This is unfortunate for me, but fortunate for the field of social choice theory as a whole.
 
-				My work is useful as:
+				My work is still useful as:
 				\begin{itemize}
 					\item A simpler proof
 					\item A proof that closely follows the original
@@ -199,18 +187,12 @@
 				\item A preference list is a total ordering of the alternatives.
 				\item The set of all preference lists is $L(C)$.
 				\item A preference profile is a sequence of $n$ preference lists.
-				\item The set of all preference profiles is $P = L(C)^n$.
-				\item A voting rule is a function that chooses a winning alternative from a profile, i.e. $f : P \to C$.
+				\item The set of all preference profiles is $L(C)^n$.
+				\item A voting rule is a function that chooses a winning alternative from a profile, i.e. $f : L(C)^n \to C$.
 				\item An election is a voting rule paired with a profile: $(f, p)$.
 			\end{itemize}
 
 			\note{
-				$m$ is the number of alternatives
-
-				$n$ is the number of voters
-
-				Voting rule == social choice function
-
 				$L(C)^n$ is the Cartesian product of $L(C)$ with itself $n$ times, or the set of all $n$-tuples of elements of $L(C)$
 			}
 		\end{frame}
@@ -245,13 +227,12 @@
 			\]
 
 			\begin{itemize}
-				\item Describes the scenario where all players together attempt to manipulate $f$ to be $b$ rather than $a$
+				\item Describes the scenario where all voters together attempt to manipulate $f$ to be $b$ rather than $a$
 				\item $p$ and $p'$ are chosen uniformly at random
+				\item Voters don't alter their preference between $a$ and $b$
 			\end{itemize}
 
 			\note{
-				This definition captures the scenario where all players together attempt to manipulate $f$ to be $b$ rather than $a$ by re-choosing at random all their preferences---except those between $a$ and $b$.
-
 				This definition does not require that anyone in particular gain from this, just that something ``unexpected'' happens.
 			}
 		\end{frame}
@@ -292,29 +273,28 @@
 		\begin{frame}
 			\frametitle{Step 3}
 
-			The original Step 3 was:
-
 			\begin{lemma}[Non-General Step 3]
-				For every SCF $f$ on $3$ alternatives and every $a,b \in A$, $M^{a,b} \le \sum_i M_i \cdot 6$
+				For every SCF $f$ on $3$ alternatives and every $a,b \in C$,
+				\[
+					M^{a,b}(f) \le \sum_i M_i(f) \cdot 6
+				\]
 			\end{lemma}
 
-			And the generalization we attempt to prove is:
-
 			\begin{lemma}[Generalized Step 3]
-				For every SCF $f$ on $m$ alternatives and every $a,b \in A$, $M^{a,b} \le \sum_i M_i \cdot m!$
+				For every SCF $f$ on $m$ alternatives and every $a,b \in C$,
+				\[
+					M^{a,b}(f) \le \sum_i M_i(f) \cdot m!
+				\]
 			\end{lemma}
 		\end{frame}
 
 		\begin{frame}
-			\frametitle{Main Result}
+			\frametitle{Combining Steps}
 
-			When we put together all 3 generalized steps we get our main result:
-
-			\begin{theorem}[Main Result]
-				There exists a constant $C > 0$ such that for every $\epsilon > 0$ the following holds. If $f$ is a neutral SCF for $n$ voters over $m$ alternatives and $\Delta(f, g) > \epsilon$ for any dictatorship $g$, then $f$ has total manipulability: $\sum^n_{i=1} M_i(f) \ge \frac{(C\epsilon)^{\lfloor m/3 \rfloor}}{m!}$.
-			\end{theorem}
-
-			Step 3 is comprised of Lemma 6, Lemma 7, and Lemma 8 which we will generalize one at a time.
+			\begin{itemize}
+				\item Step 3 is comprised of Lemma 6, Lemma 7, and Lemma 8 which we will generalize one at a time
+				\item When we put together all 3 generalized steps we get our main result
+			\end{itemize}
 		\end{frame}
 
 	\section{Results}
@@ -325,16 +305,16 @@
 
 			\begin{lemma}[Original Lemma 6]
 				\[
-					M^{a,b}(f) = \expectedvalue_{q \in L(C)^n} \left[ \frac{|A(q)|}{3^n} \cdot \frac{|B(q)|}{3^n} \right],
+					M^{a,b}(f) = \expectedvalue_{p} \left[ \frac{|A(p)|}{3^n} \cdot \frac{|B(p)|}{3^n} \right],
 				\]
-				where $q$ is chosen uniformly at random.
+				where $p \in L(C)^n$ is chosen uniformly at random.
 			\end{lemma}
 
 			\begin{lemma}[Generalized Lemma 6]
 				\[
-					M^{a,b}(f) = \expectedvalue_{q \in L(C)^n} \left[ \frac{|A(q)|}{\left(\frac{m!}{2}\right)^n} \cdot \frac{|B(q)|}{\left(\frac{m!}{2}\right)^n} \right],
+					M^{a,b}(f) = \expectedvalue_{p} \left[ \frac{|A(p)|}{\left(\frac{m!}{2}\right)^n} \cdot \frac{|B(p)|}{\left(\frac{m!}{2}\right)^n} \right],
 				\]
-				where $q$ is chosen uniformly at random.
+				where $p \in L(C)^n$ is chosen uniformly at random.
 			\end{lemma}
 		\end{frame}
 
@@ -349,11 +329,11 @@
 		\end{frame}
 
 		\begin{frame}
-			\frametitle{Define $M^{a,b}$}
+			\frametitle{Recall $M^{a,b}$ Definition}
 
-			Recall the definition of $M^{a,b}(f)$ from Friedgut:
+			Recall the definition of $M^{a,b}(f)$:
 			\[
-				M^{a,b}(f) = \probability(f(p) = a, f(p') = b)
+				M^{a,b}(f) = \probability[f(p) = a, f(p') = b]
 			\]
 			where $p, p'$ are chosen at random in $L(C)^n$ with $p|_{\{a,b\}} = p'|_{\{a,b\}}$.
 		\end{frame}
@@ -361,17 +341,45 @@
 		\begin{frame}
 			\frametitle{Size of Profiles}
 
-			For any preference profile $p \in P$ there are $(\frac{m!}{2})^n$ profiles $x$ such that $x|_{\{a, b\}} = p|_{\{a, b\}}$. This is because there are $m!$ possible preference lists; half of them will have the preference between $a$ and $b$ that agrees with $p|_{\{a, b\}}$ and half will disagree. This gives $\frac{m!}{2}$ possible preference lists for each voter, so there are $(\frac{m!}{2})^n$ profiles comprised of these preference lists.
+			For any preference profile $p \in L(C)^n$ there are $(\frac{m!}{2})^n$ profiles $x$ such that $x|_{\{a, b\}} = p|_{\{a, b\}}$ because:
+
+			\begin{itemize}
+				\item There are $m!$ possible preference lists
+				\item Half of them will have the preference between $a$ and $b$ that agrees with $p_i|_{\{a, b\}}$, for any $i$
+				\item This gives $\frac{m!}{2}$ possible preference lists for each voter
+				\item So there are $(\frac{m!}{2})^n$ profiles comprised of these preference lists
+			\end{itemize}
 		\end{frame}
 
 		\begin{frame}
 			\frametitle{Proof of Generalized Lemma 6}
 
-			First we fix a profile $q$. Then
-			\[
-				\frac{|A(q)|}{\left(\frac{m!}{2}\right)^n}
-			\]
-			is the probability that a randomly chosen profile, $p$, satisfying $p|_{\{a,b\}} = q|_{\{a,b\}}$ also satisfies $f(p) = a$. This is because there are $(\frac{m!}{2})^n$ profiles that agree with $q|_{\{a,b\}}$, and $|A(q)|$ is the number of those for which the outcome is $a$.
+			\begin{itemize}
+				\item First we fix a profile $q$
+				\item There are $(\frac{m!}{2})^n$ profiles that agree with $q|_{\{a,b\}}$
+				\item $|A(q)|$ is the number of those for which the outcome is $a$
+				\item Randomly choose a profile, $p$, satisfying $p|_{\{a,b\}} = q|_{\{a,b\}}$
+				\item So the probability that $f(p) = a$ is
+					\[
+						\frac{|A(q)|}{\left(\frac{m!}{2}\right)^n}
+					\]
+			\end{itemize}
+		\end{frame}
+
+		\begin{frame}
+			\frametitle{Proof of Generalized Lemma 6}
+
+			\begin{itemize}
+				\item Likewise, randomly choose a profile, $p'$, satisfying $p'|_{\{a,b\}} = q|_{\{a,b\}}$
+				\item And the probability that $f(p') = b$ is
+					\[
+						\frac{|B(q)|}{\left(\frac{m!}{2}\right)^n}
+					\]
+			\end{itemize}
+		\end{frame}
+
+		\begin{frame}
+			\frametitle{Proof of Generalized Lemma 6}
 
 			Since $p|_{\{a,b\}} = q|_{\{a,b\}}$ and $p'|_{\{a,b\}} = q|_{\{a,b\}}$, clearly we have that $p|_{\{a,b\}} = p'|_{\{a,b\}}$. Since $f(p) = a$ and $f(p') = b$ are independent events, the joint probability is
 			\[
@@ -384,11 +392,11 @@
 
 			So we can rewrite
 			\[
-				M^{a,b}(f) = \probability(f(p) = a, f(p') = b)
+				M^{a,b}(f) = \probability[f(p) = a, f(p') = b]
 			\]
 			as
 			\[
-				M^{a,b}(f) = \expectedvalue_{q \in L(C)^n} \left[ \frac{|A(q)|}{\left(\frac{m!}{2}\right)^n} \cdot \frac{|B(q)|}{\left(\frac{m!}{2}\right)^n} \right],
+				M^{a,b}(f) = \expectedvalue_{q} \left[ \frac{|A(q)|}{\left(\frac{m!}{2}\right)^n} \cdot \frac{|B(q)|}{\left(\frac{m!}{2}\right)^n} \right],
 			\]
 			\qed
 		\end{frame}
@@ -436,7 +444,7 @@
 			\end{columns}
 
 			\note{
-				$x_{-i}$ with the $i$th index removed.
+				$x_{-i}$ is $x$ without the $i$th index.
 			}
 		\end{frame}
 
@@ -452,7 +460,9 @@
 			\end{alignat*}
 
 			\note{
-				For all $i \in \{1, \ldots, n\}$
+				We don't have time to go into more of the lattice work I've done, including $<_s$.
+
+				$<_s$ means something like being close to the $(1, 2, 3)$ ordering.
 
 				We define the upper edge border of $B(p)$ analogously.
 			}
@@ -462,7 +472,7 @@
 			\frametitle{Edges Correspond to Manipulations}
 
 			\begin{lemma}
-				Then each $(x_{-i}, x_i, x'_i) \in \partial_i A(p) \cup \partial_i B(p)$ corresponds to at least one successful manipulation.
+				Each $(x_{-i}, x_i, x'_i) \in \partial_i A(p) \cup \partial_i B(p)$ corresponds to at least one successful manipulation.
 			\end{lemma}
 
 			\note{
@@ -516,6 +526,13 @@
 					\[
 						M_i(f) \ge \frac{1}{2} \cdot \frac{2}{m!}\left(\frac{2}{m!}\right)^{n} \cdot \expectedvalue_p \left[ |\partial_i A(p)| + |\partial_i B(p)| \right].
 					\]
+			\end{itemize}
+		\end{frame}
+
+		\begin{frame}
+			\frametitle{Proof of Generalized Lemma 7}
+
+			\begin{itemize}
 				\item Simplifying gives
 					\[
 						M_i(f) \ge \frac{1}{m!}\left(\frac{2}{m!}\right)^{n} \cdot \expectedvalue_p \left[ |\partial_i A(p)| + |\partial_i B(p)| \right].
@@ -576,8 +593,12 @@
 			\end{align*}
 
 			\note{
-				$A \equiv A(p)$ because it's \emph{much} easier to read
-				Also, $M^{a,b} \equiv M^{a,b}(f)$ and $M_i \equiv M_i(f)$
+				Because it's \emph{much} easier to read:
+				\begin{itemize}
+					\item $A \equiv A(p)$
+					\item $M^{a,b} \equiv M^{a,b}(f)$
+					\item $M_i \equiv M_i(f)$
+				\end{itemize}
 			}
 		\end{frame}
 
@@ -609,8 +630,15 @@
 
 			By combining it with Friedgut's step 1 and 2 we get the generalized main theorem:
 			\begin{theorem}[Main Result]
-				There exists a constant $C > 0$ such that for every $\epsilon > 0$ the following holds. If $f$ is a neutral SCF for $n$ voters over 3 alternatives and $\Delta(f, g) > \epsilon$ for any dictatorship $g$, then $f$ has total manipulatiblity: $\sum^n_{i=1} M_i(f) \ge \frac{(C\epsilon)^{\lfloor m/3 \rfloor}}{m!}$.
+				There exists a constant $C > 0$ such that for every $\epsilon > 0$ the following holds. If $f$ is a neutral SCF for $n$ voters over $m$ alternatives and $\Delta(f, g) > \epsilon$ for any dictatorship $g$, then $f$ has total manipulatiblity:
+				\[
+					\sum^n_{i=1} M_i(f) \ge \frac{(C\epsilon)^{\lfloor m/3 \rfloor}}{m!}.
+				\]
 			\end{theorem}
+
+			\note{
+				In this case $C$ is a constant, and not the set of the alternatives.
+			}
 		\end{frame}
 
 
