@@ -2,7 +2,7 @@
 \usepackage{pgfpages}
 
 % \setbeameroption{show only notes}
-\setbeameroption{show notes}
+% \setbeameroption{show notes}
 
 % Handouts
 % \pgfpagesuselayout{4 on 1}[letterpaper,border shrink=5mm,landscape]
@@ -220,7 +220,7 @@
 		\end{frame}
 
 		\begin{frame}
-			\frametitle{Manipulation Potential}
+			\frametitle{Dependence on Irrelevant Alternatives}
 
 			\[
 				M^{a,b}(f) = \probability[f(p) = a, f(p') = b]
@@ -273,7 +273,7 @@
 		\begin{frame}
 			\frametitle{Step 3}
 
-			\begin{lemma}[Non-General Step 3]
+			\begin{lemma}[Original Step 3]
 				For every SCF $f$ on $3$ alternatives and every $a,b \in C$,
 				\[
 					M^{a,b}(f) \le \sum_i M_i(f) \cdot 6
@@ -424,6 +424,16 @@
 			\frametitle{Profile Lattice}
 
 			\centerline{\includegraphics[height=0.7\paperheight, keepaspectratio]{../figures/profile_lattice.pdf}}
+
+			\note{
+				\begin{itemize}
+					\item Nodes are profiles
+					\item Lists of numbers are preference lists
+					\item Edges connect nodes/profiles that only differ in one voter
+					\item Edges are directional and go towards nodes that are closer to the bottom right (3, 2, 1)
+					\item I don't have time to go into detail on the directionality of the edges
+				\end{itemize}
+			}
 		\end{frame}
 
 		\begin{frame}
@@ -522,7 +532,7 @@
 					\[
 						\frac{2}{m!} \left(\frac{2}{m!}\right)^{n} \cdot \expectedvalue_p \left[ |\partial_i A(p)| + |\partial_i B(p)| \right]
 					\]
-				\item We conditioned our analysis on $p_{-i}|_{\{a,b\}} = p'_{-i}|_{\{a,b\}}$, so our lower bound becomes
+				\item We conditioned our analysis on $p_i|_{\{a,b\}} = p'_i|_{\{a,b\}}$, so our lower bound becomes
 					\[
 						M_i(f) \ge \frac{1}{2} \cdot \frac{2}{m!}\left(\frac{2}{m!}\right)^{n} \cdot \expectedvalue_p \left[ |\partial_i A(p)| + |\partial_i B(p)| \right].
 					\]
